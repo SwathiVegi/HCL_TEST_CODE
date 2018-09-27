@@ -1,21 +1,24 @@
 package com.springmvc.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.model.Employee;
 import com.springmvc.service.IEmployeeService;
@@ -23,6 +26,7 @@ import com.springmvc.service.IEmployeeService;
 @Controller
 @RequestMapping("/")
 public class EmployeeController {
+	static Logger log = Logger.getLogger(EmployeeController.class);
 
 	@Autowired
 	IEmployeeService service;
@@ -120,5 +124,26 @@ public class EmployeeController {
 		service.deleteEmployeeByNumber(code);
 		return "redirect:/list";
 	}
+	
+	@ExceptionHandler(Exception.class)
+	public ModelAndView logAndHandleException(HttpServletRequest request, Exception ex){
+		log.error("Requested URL="+request.getRequestURL());
+		log.error("Exception Raised=", ex);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		String rootcause = "";
+				if(ex.getMessage() != null){
+					rootcause = ex.getMessage();
+				}else{
+					rootcause = ex.toString();
+				}
+		
+	    modelAndView.addObject("rootcause", rootcause);
+	    modelAndView.addObject("url", request.getRequestURL());
+	    
+	    modelAndView.setViewName("error");
+	    return modelAndView;
+	}	
 
 }

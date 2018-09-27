@@ -1,0 +1,8 @@
+body {
+    background-color: lightblue;
+}
+
+
+.employeeDataTable.tr{
+	font-weight: bold; background-color: #C6C9C4;
+}

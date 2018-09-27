@@ -42,11 +42,11 @@ th {
 <body>
 
 	<form:form method="GET" modelAttribute="employee">
-		<table>
+		<table style="width:20%">
 			<tr>
 				<td>Search:</td>
 				<td><input type="text" name="keyword" value="${keyword}" /></td>
-				<td><input type="submit" name="search" /></td>
+				<td><input type="submit" name="search" value="search" /></td>
 			</tr>
 		</table>
 

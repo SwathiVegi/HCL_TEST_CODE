@@ -21,7 +21,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	}
 
 	public void saveEmployee(Employee employee) {
-		dao.saveStudent(employee);
+		dao.saveEmployee(employee);
 	}
 	
 	public void updateEmployee(Employee employee) {
@@ -32,7 +32,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 			entity.setEnteringDate(employee.getEnteringDate());
 			entity.setNationality(employee.getNationality());
 			entity.setCode(employee.getCode());
-			//dao.saveOrUpdate(student);
+			dao.saveEmployee(entity);
 		}
 	}
 

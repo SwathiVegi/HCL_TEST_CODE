@@ -26,6 +26,7 @@ public class MyWebConfig {
 		return viewResolver;
 	}
 	
+	
 	@Bean
 	public MessageSource messageSource() {
 	    ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();

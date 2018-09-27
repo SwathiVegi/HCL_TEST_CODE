@@ -8,7 +8,7 @@ public interface IEmployeeDao {
 
 	Employee findById(int id);
 
-	void saveStudent(Employee employee);
+	void saveEmployee(Employee employee);
 	
 	public void saveOrUpdate(Employee employee);
 	

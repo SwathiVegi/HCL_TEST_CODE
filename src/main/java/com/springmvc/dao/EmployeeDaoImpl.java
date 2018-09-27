@@ -18,7 +18,7 @@ public class EmployeeDaoImpl extends AbstractDao<Integer, Employee>implements IE
 		return getByKey(id);
 	}
 
-	public void saveStudent(Employee employee) {
+	public void saveEmployee(Employee employee) {
 		persist(employee);
 	}
 

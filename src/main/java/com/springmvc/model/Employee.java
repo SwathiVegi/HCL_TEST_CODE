@@ -121,7 +121,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + firstName + ", enteringDate="
+		return "Employee [id=" + id + ", name=" + firstName + ", enteringDate="
 				+ enteringDate + ", nationality=" + nationality + ", code=" + code + "]";
 	}
 	

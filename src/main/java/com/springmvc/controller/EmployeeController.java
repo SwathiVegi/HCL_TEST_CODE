@@ -39,7 +39,7 @@ public class EmployeeController {
 		List<Employee> employees = service.findAllEmployees(keyword);
 		model.addAttribute("employees", employees);
 		model.addAttribute("keyword", keyword);
-		return "allstudents";
+		return "allemployees";
 	}
 
 	/*
@@ -113,7 +113,7 @@ public class EmployeeController {
 
 	
 	/*
-	 * Delete an Student by it's CODE value.
+	 * Delete an employee by it's CODE value.
 	 */
 	@RequestMapping(value = { "/delete-{code}-employee" }, method = RequestMethod.GET)
 	public String deleteEmployee(@PathVariable String code) {

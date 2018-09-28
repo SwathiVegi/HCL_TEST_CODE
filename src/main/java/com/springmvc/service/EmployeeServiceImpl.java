@@ -2,19 +2,26 @@ package com.springmvc.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springmvc.dao.IEmployeeDao;
 import com.springmvc.model.Employee;
+import com.springmvc.queue.MessageSender;
 
 @Service("employeeService")
 @Transactional
 public class EmployeeServiceImpl implements IEmployeeService {
+	static Logger log = Logger.getLogger(EmployeeServiceImpl.class);
 
 	@Autowired
 	private IEmployeeDao dao;
+	
+	
+	@Autowired
+    MessageSender messageSender;
 	
 	public Employee findById(int id) {
 		return dao.findById(id);
@@ -22,6 +29,17 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	public void saveEmployee(Employee employee) {
 		dao.saveEmployee(employee);
+		//we can externalize this parameter in a config file, as of now hard coding in the code.
+		final boolean enableMessaging = false;
+		if(enableMessaging){
+			this.publishEmployeeCreationMessage(employee);
+		}
+	}
+	
+	protected void publishEmployeeCreationMessage(Employee employee){
+		log.info("Application : sending JMS EMployee Creation request =" + employee);
+        	messageSender.sendMessage(employee);
+        log.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
 	}
 	
 	public void updateEmployee(Employee employee) {

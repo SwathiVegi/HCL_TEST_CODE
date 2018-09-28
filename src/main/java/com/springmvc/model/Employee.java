@@ -1,5 +1,7 @@
 package com.springmvc.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +18,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="EMPLOYEE")
-public class Employee {
+public class Employee implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
